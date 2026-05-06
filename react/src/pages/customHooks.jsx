@@ -2,7 +2,7 @@ import { use } from 'react';
 import {useState, useEffect} from 'react';
 
 const Home = () => { 
-   onst useFetch = (url) => {
+   const useFetch = (url) => {
   const [data, setData] = useState(null);
 
   useEffect(() => {

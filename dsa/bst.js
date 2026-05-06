@@ -96,6 +96,46 @@ class bst{
         return this.max(root.right)
     }
   }
+
+  printleafNode(root){
+    if(!root) return;
+    if(root.left === null && root.right === null){
+        console.log(root.value);
+        return;
+    } 
+    this.printleafNode(root.left);
+    this.printleafNode(root.right)
+}
+
+findLargest(root){
+  // console.log(root)
+  if(!root) return;
+   if(root.right === null) return root.value;
+
+    return this.findLargest(root.right);
+}
+
+findSecondLargest(root) {
+    if (!root || (!root.left && !root.right)) return null; // Tree too small
+
+    let curr = root;
+    while (curr) {
+        // Case 1: Largest node has a left subtree
+        // We are at the largest node, and it has a left child.
+        // The 2nd largest is the max of that left subtree.
+        if (curr.left && !curr.right) {
+            return this.findLargest(curr.left);
+        }
+
+        // Case 2: We are at the parent of the largest node, 
+        // and the largest node is a leaf.
+        if (curr.right && !curr.right.left && !curr.right.right) {
+            return curr.value;
+        }
+
+        curr = curr.right;
+    }
+}
 }
 
 
@@ -109,4 +149,10 @@ bst1.insert(7)
 bst1.insert(1)
 // bst1.inOrder(bst1.root)
 // bst1.preOrder(bst1.root)
-bst1.levelOrder();
+// bst1.levelOrder();
+
+// bst1.printleafNode(bst1.root)
+console.log(bst1.findLargest(bst1.root))
+bst1.inOrder(bst1.root)
+
+console.log(bst1.secondlargest(bst1.root))
