@@ -1,0 +1,54 @@
+Question 1 (Practical Query & Aggregation)Scenario: You have an employees
+ collection where multiple employees might share the exact same salary.
+Task: Write a MongoDB query (or aggregation pipeline) to find the $2^\text{nd}$ 
+highest salary from this collection. Your solution must correctly handle cases where 
+the highest salary is duplicated (e.g., if salaries are [100, 100, 90, 80], the $2^\text{nd}$
+ highest salary should be 90).
+
+ db.employees.insertMany([
+  { name: "Alice", salary: 100000, department: "Engineering" },
+  { name: "Bob", salary: 100000, department: "Sales" },      // Duplicate highest
+  { name: "Charlie", salary: 95000, department: "Engineering" }, // This is the 2nd highest
+  { name: "David", salary: 95000, department: "HR" },          // Duplicate 2nd highest
+  { name: "Eve", salary: 80000, department: "Engineering" },
+  { name: "Frank", salary: 70000, department: "Sales" }
+]);
+//ans
+db.employees.aggregate([
+  {$group: {
+    _id: "$salary"
+  }},{
+    $sort: {_id: -1}},
+    {$skip: 1},
+    {$limit: 1},
+    {$project: {_id: 0, salary: "$_id"}}
+  ])
+
+
+Question 2 (Indexing & Performance)
+Scenario: Your application has a collection called orders with millions of documents. 
+You frequently run a query to find orders for a specific userId and sort them by orderDate (newest first). You decide to create an index to speed this up.
+
+Task: > 1. What type of index should you create?
+2. Does the order of fields in the index matter (e.g., {userId: 1, orderDate: -1} vs {orderDate: -1, userId: 1})? Why?
+
+This tests your understanding of Compound Indexes and the ESR (Equality, Sort, Range) rule. How would you approach this?
+
+1. I will use compound indexing to make this query faster.
+
+db.users.createIndex({userId: 1, orderDate: -1}).
+
+yes the order of index matter firstly an indexing is created for userId and then with respect to the userID indexes are created for orderDate
+
+Excellent! That is exactly right. You applied the Equality field (userId) before the Sort field (orderDate).
+
+Deep Dive: The ESR Rule
+In MongoDB, we follow the ESR (Equality, Sort, Range) rule to design the most efficient compound indexes:
+
+Equality: Fields you match exactly (e.g., userId: "123").
+
+Sort: Fields you use to order the results (e.g., orderDate: -1).
+
+Range: Fields used for inequalities (e.g., price: { $gt: 500 }).
+
+By putting userId first, MongoDB can jump straight to the "bucket" for that user. Because the orderDate is indexed within that bucket in descending order, the database can simply read the documents in order without having to perform an expensive "In-Memory Sort."
