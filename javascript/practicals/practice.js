@@ -1,12 +1,6 @@
 // Given an array of student objects (e.g., { name: "John", score: 85, class: "A" }), 
 // write a function to find the student with the highest score.
 
-const { rejects } = require("node:assert");
-const { resolve } = require("node:dns");
-const { get } = require("node:http");
-const { json } = require("node:stream/consumers");
-const { todo } = require("node:test");
-const { callbackify } = require("node:util");
 
 // const arr = [{ name: "John", score: 85, class: "A" },{ name: "Jo", score: 95, class: "B" }]
 // const highestStudent = arr.reduce((acc, curr) => {
@@ -328,4 +322,119 @@ const { callbackify } = require("node:util");
 // What is Currying in JavaScript, and can you write a simple function multiply(a)(b)(c)
 //  that returns the product of all three numbers?
 
-const curr =  (x) => (y) => z => x*y*z;
+// const curr =  (x) => (y) => z => x*y*z;
+
+//fibonacci recursion
+
+// function fibonnacci(n){
+//     if(n === 0) return 0;
+//     if(n === 1) return 1;
+
+//     return fibonnacci(n-1) + fibonnacci(n-2)
+// }
+// console.log(fibonnacci(5))
+
+// //print fibonnacci series
+// function printSeries(n){
+//    for(let i = 0; i < n; i++){
+//     console.log(fibonnacci(i))
+//    }
+// }
+// printSeries(5)
+
+// individual digit sum using recursion eg:123 result =6
+
+// function individualSum(n){
+//    if(n < 10) return n;
+   
+//    let enddigit = n % 10;
+//    n = Math.floor(n / 10);
+//    return enddigit + individualSum(n)
+// }
+// console.log(individualSum(55567))
+
+// String reverse using recursion
+// function StringReverse(str){
+//     if(str.length === 1) return str
+    
+
+//     return str.slice()
+// }
+// console.log(StringReverse("Mishal"))
+// let str = "Mishal"
+// console.log(str.slice(str.length - 1,))
+// console.log(str.slice(0, str.length - 1))
+
+// Number reverse without converting into string using recursion
+
+// function numberReverse(n, reversed = 0){
+//    if(n === 0) return reversed;
+
+//    let digit = n % 10;
+//    reversed = reversed * 10 + digit;
+//    n = Math.floor(n/10)
+//    return numberReverse(n, reversed)
+// }
+// console.log(numberReverse(12345))
+
+
+// Task
+
+// Using promise chaining (NOT async/await), print the following in order:
+
+// Step 1
+// Step 2
+// Step 3
+// All Steps Completed
+
+// Each step should wait for the previous one to finish.
+
+// Expected Behavior
+
+// After 1 second:
+
+// Step 1
+
+// After another 1 second:
+
+// Step 2
+
+// After another 1 second:
+
+// Step 3
+
+// Finally:
+
+// All Steps Completed
+
+// function task(message) {
+//   return new Promise((resolve) => {
+//     setTimeout(() => {
+//       console.log(message);
+//       resolve();
+//     }, 1000);
+//   });
+// }
+// task("Step 1")
+//   .then(() => task("Step 2"))
+//   .then(() => task("Step 3"))
+//   .then(() => console.log("All Steps Completed"));
+
+// Largest odd number in array using reduce.
+// const arr = [4,6,8]
+// const Largest = arr.reduce((acc, curr) => {
+//   return curr % 2 === 1 && curr > acc ?curr : acc
+// }, -1)
+// console.log(Largest)
+
+//1 to 100 multiples of 5 using generator function
+// function * gen(n){
+//     for(let i = 1 ; i<= n; i++){
+//         yield i * 5
+//     }
+// }
+// const g1 = gen(100)
+// console.log(g1.next().value)
+// console.log(g1.next().value)
+// console.log(g1.next().value)
+// console.log(g1.next().value)
