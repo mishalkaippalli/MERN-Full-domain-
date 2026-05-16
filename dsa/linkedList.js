@@ -144,8 +144,81 @@ removeSecondLast() {
     this.size--;
     return removedNode.value;
 }
-   
+
+ removeMiddleElement() {
+
+        // empty list
+        if (!this.head) {
+            return null;
+        }
+
+        // single node
+        if (!this.head.next) {
+            let removed = this.head.value;
+            this.head = null;
+            return removed;
+        }
+
+        let fast = this.head;
+        let slow = this.head;
+        let prev = null;
+
+        while (fast.next && fast.next.next) {
+            prev = slow;
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        let removedNode;
+
+        // ODD LENGTH
+        if (fast.next === null) {
+
+            removedNode = slow;
+
+            prev.next = slow.next;
+        }
+
+        // EVEN LENGTH
+        else {
+
+            // two middle nodes:
+            // slow and slow.next
+
+            if (slow.value < slow.next.value) {
+
+                // remove first middle
+                removedNode = slow;
+
+                prev.next = slow.next;
+
+            } else {
+
+                // remove second middle
+                removedNode = slow.next;
+
+                slow.next = slow.next.next;
+            }
+        }
+
+        return removedNode.value;
+    }
+
+    reverseLL(){
+        let curr = this.head;
+        let prev = null;
+        let next = null;
+        while(curr){
+          next = curr.next;
+          curr.next = prev;
+          prev = curr;
+          curr = next;
+        }
+        this.head = prev
+        
+    }
 }
+
 const ls = new linkedList;
 ls.append(3);
 ls.append(4);
@@ -159,4 +232,9 @@ ls.print()
 console.log(ls.removeFrom(3))
 ls.print()
 console.log("sl",ls.removeSecondLast());
+ls.prepend(5);
 ls.print()
+console.log("middleelem",ls.removeMiddleElement());
+ls.print();
+ls.reverseLL();
+ls.print();

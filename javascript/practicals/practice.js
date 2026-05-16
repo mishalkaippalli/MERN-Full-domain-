@@ -438,3 +438,60 @@
 // console.log(g1.next().value)
 // console.log(g1.next().value)
 // console.log(g1.next().value)
+
+//fibonacci without recursion
+// function fibonacci(n){
+
+//     if(n <= 0) return 0;
+
+//     if(n === 1) return 0;
+
+//     let first = 0;
+//     let second = 1;
+
+//     // include first two fibonacci numbers
+//     let sum = first + second;
+
+//     for(let i = 2; i < n; i++){
+
+//         let next = first + second;
+
+//         sum += next;
+
+//         first = second;
+//         second = next;
+//     }
+
+//     return sum;
+// }
+
+// console.log(fibonacci(4));
+
+
+
+// group the Anagrams
+
+// const input = ["eat", "tea", "tan", "ate", "nat", "bat","tab"];
+
+// output (order doesn’t matter): 
+//  [
+//   ["eat", "tea", "ate"],
+//   ["tan", "nat"],
+//   ["bat"]
+//  ]
+
+// function groupAnagrams(arr){
+//     let map = []
+//     for(let s of arr){
+//         let key = s.split('').sort().join('');
+
+//         if(map[key]){
+//             map[key].push(s)
+//         }else{
+//             map[key] = [];
+//             map[key].push(s)
+//         }
+//     }
+//     console.log(Object.values(map))
+// }
+// groupAnagrams(input)

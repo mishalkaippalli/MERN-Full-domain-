@@ -1,23 +1,31 @@
-// Create a custom middleware.
+//child process.
 
-// Requirements:
+// const {exec} = require("child_process");
+// const { stderr } = require("process");
 
-// Log method, URL, and timestamp
-// Apply globally
+// exec("dir",(err, stdout, stderr) => {
+//     console.log(stdout)
+// })
 
-const express = require("express");
-const app = express();
+// const {execFile} = require("child_process");
+// execFile("python", ["pythonscript.py"], (err, stdout, sdterr) => {
+//     console.log(stdout)
+// })
+// const {spawn} = require('child_process');
 
-app.use((req, res, next) => {
-    console.log(req.method);
-    console.log(req.url);
-    console.log(new Date);
+// const child = spawn('python', ["pythonscript.py"])
 
-    next();
+// child.stdout.on("data", (data) => {
+//     console.log(data.toString())
+// });
+
+const {fork} = require("child_process")
+
+
+const worker = fork("./worker.js")
+worker.send(5)
+
+worker.on("message", (data) =>{
+    console.log(data.toString())
 })
 
-app.get("/home", (req, res) => {
-   res.send("home")
-})
-
-app.listen(3000, () => console.log("App runnning on 3000"));

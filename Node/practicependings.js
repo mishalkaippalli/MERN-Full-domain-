@@ -94,13 +94,151 @@ app.listen(3000, () => console.log("app running on 3000"));
 
 // The Role (admin)?
 // (Note: Mention if any specific middleware is needed for the Body).
-app.use(express.json())
-app.get("/user/:id", (req, res) => {
-    const id = req.params.id
-    const status = req.query.status;
-    const role = req.body.role
+// app.use(express.json())
+// app.get("/user/:id", (req, res) => {
+//     const id = req.params.id
+//     const status = req.query.status;
+//     const role = req.body.role
     
-    res.send({ id, status, role })
+//     res.send({ id, status, role })
 
-    console.log("id", id, "status", status, "role", role)
-})
+//     console.log("id", id, "status", status, "role", role)
+// })
+
+//route params
+// app.get("/profile/:id", (req, res) => {
+
+//     const id = req.params.id;
+
+//     res.send(`Profile ID: ${id}`);
+// });
+//query params
+// app.get("/profile", (req, res) => {
+
+//     const product = req.query.product;
+
+//     res.send(`Product: ${product}`);
+// });
+
+//router level middleware implementation
+const express = require("express");
+
+const router = express.Router();
+
+
+// Router-level middleware
+// router.use((req, res, next) => {
+
+//     console.log("Router middleware executed");
+
+//     next();
+// });
+
+
+// // Routes
+// router.get("/profile", (req, res) => {
+
+//     res.send("User Profile");
+// });
+
+// router.get("/settings", (req, res) => {
+
+//     res.send("User Settings");
+// });
+
+
+// module.exports = router;
+
+//server.js
+// const express = require("express");
+
+// const app = express();
+
+// const userRoutes = require("./routes/userRoutes");
+
+
+// // Using router
+// app.use("/user", userRoutes);
+
+
+// app.listen(3000, () => {
+
+//     console.log("Server running on port 3000");
+// });
+
+//readStream
+const fs = require("fs");
+
+
+// Create read stream
+const readStream = fs.createReadStream("input.txt", "utf-8");
+
+
+// Listen for data
+readStream.on("data", (chunk) => {
+
+    console.log("Chunk received:");
+    console.log(chunk);
+});
+
+
+// Stream end
+readStream.on("end", () => {
+
+    console.log("Reading completed");
+});
+
+
+// Error handling
+readStream.on("error", (error) => {
+
+    console.log(error);
+});
+
+//writeStream
+const fs = require("fs");
+
+
+// Create write stream
+const writeStream = fs.createWriteStream("output.txt");
+
+
+// Write data
+writeStream.write("Hello from Write Stream\n");
+
+writeStream.write("Node.js Streams are efficient\n");
+
+
+// End stream
+writeStream.end();
+
+
+// Finish event
+writeStream.on("finish", () => {
+
+    console.log("Writing completed");
+});
+
+
+// Error handling
+writeStream.on("error", (error) => {
+
+    console.log(error);
+});
+
+
+//3. Read Stream + Write Stream (Pipe)
+const fs = require("fs");
+
+
+// Create streams
+const readStream = fs.createReadStream("input.txt");
+
+const writeStream = fs.createWriteStream("copy.txt");
+
+
+// Pipe data
+readStream.pipe(writeStream);
+
+
+console.log("File copied successfully");

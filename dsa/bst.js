@@ -136,6 +136,41 @@ findSecondLargest(root) {
         curr = curr.right;
     }
 }
+
+kthSmallest(root, k){
+
+    const arr = [];
+
+    function inOrder(root){
+
+        if(!root) return;
+
+        inOrder(root.left);
+
+        arr.push(root.value);
+
+        inOrder(root.right);
+    }
+
+    inOrder(root);
+
+    return arr[k - 1];
+}
+
+nthGreatest(root, n){
+  const arr = [];
+  revInorder(root)
+  //reverse inOrder
+  function revInorder(root){
+      if(!root) return
+
+      revInorder(root.right);
+      arr.push(root.value);
+      revInorder(root.left);
+  }
+  return arr[n-1]
+}
+
 }
 
 
@@ -155,4 +190,6 @@ bst1.insert(1)
 console.log(bst1.findLargest(bst1.root))
 bst1.inOrder(bst1.root)
 
-console.log(bst1.secondlargest(bst1.root))
+console.log(bst1.findSecondLargest(bst1.root))
+console.log(".....")
+console.log(bst1.nthGreatest(bst1.root,3))

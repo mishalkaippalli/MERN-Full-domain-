@@ -13,6 +13,11 @@ import Timer from './pages/Timer'
 import ToggleExample from './pages/toggle'
 import Parent1 from './pages/ChildParent'
 import ToggleUsingUseContext from './pages/toggleUsingContext'
+import WithLoading from './pages/practice'
+import FetchUsers from './pages/practice'
+import Appforlogin from './pages/practice'
+import AppTrial from './pages/practice'
+
 
 function App() {
   const [count, setCount] = useState(0)
@@ -30,6 +35,10 @@ function App() {
         <Link to="/toggle">toggle</Link>
         <Link to="/toggleusingcontext">toggleusingusecontext</Link>
         <Link to="/parentchildform">formparentchild</Link>
+        <Link to="/practice">Practice</Link>
+        <Link to="/fetchusers">fetchusers</Link>
+        <Link to="appforlogin">Login user</Link>
+        <Link to="apptrial">App trial</Link>
       </nav>
 
       <Routes>
@@ -42,6 +51,10 @@ function App() {
         <Route path="/toggle" element={<ToggleExample/>}/>
         <Route path="/toggleusingcontext" element={<ToggleUsingUseContext />} />
         <Route path="/parentchildform" element={<Parent1 />} />
+        <Route path="/practice" element={<WithLoading isLoading={false} name="Mishal" />} />
+        <Route path="fetchusers" element={<FetchUsers/>}></Route>
+        <Route path="appforlogin" element={<Appforlogin/>}></Route>
+        <Route path="apptrial" element={<Appforlogin/>}></Route>
       </Routes>
     </>
   )
